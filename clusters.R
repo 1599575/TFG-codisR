@@ -86,7 +86,7 @@ analisi_clusters_jerarquics <- function(dades, titol = "Anàlisi_de_Clústers", 
   hc_Z <- hclust(dist_Z, method = "ward.D2")
   
   # Visualització del dendrograma
-  plot(hc_Z, main = paste("Dendrograma-", titol))
+  plot(hc_Z, labels = FALSE, main = " ", sub = " ", xlab = "Observacions", ylab = "Distància_d'agregació")
   
   # Càlcul inestabilitat
   ks <- 2:10
@@ -96,8 +96,7 @@ analisi_clusters_jerarquics <- function(dades, titol = "Anàlisi_de_Clústers", 
   
   # Gràfic d'inestabilitat
   plot(ks, inestabilitats, type = "b", pch = 19, col = "blue",
-       xlab = "Nombre_de_clústers_(k)", ylab = "Inestabilitat_(MMD_mitjà)",
-       main = paste("Inestabilitat_dels_clústers-", titol))
+       xlab = "Nombre_de_clústers_(k)", ylab = "Inestabilitat_mitjana")
   abline(v = ks[which.min(inestabilitats)], col = "red", lty = 2)
   
   # Tria del millor k i creació dels clústers
@@ -128,11 +127,11 @@ visualitzacio_mitjanes <- function(resultats, noms_variables, metode = "jerarqui
   # Preparació de dades segons el mètode
   if (metode == "jerarquic") {
     dades <- resultats$dades_amb_clusters
-    prefix <- "Clúster "
+    prefix <- "Clúster_"
   } else if (metode == "kmeans") {
     dades <- as.data.frame(resultats$dades_descorrelacionades)
     dades$cluster <- resultats$clusters_kmeans
-    prefix <- "Clúster "
+    prefix <- "Clúster_"
   }
   
   # Calculem mitjanes per cluster
@@ -152,7 +151,7 @@ visualitzacio_mitjanes <- function(resultats, noms_variables, metode = "jerarqui
   # Crear gràfic
   ggplot(mitjanes_clust, aes(x = Variable, y = score, col = cluster, group = cluster)) +
     geom_point() + geom_line() +
-    xlab(" ") + ylab("Consum estandaritzat") +
+    xlab("") + ylab("Consum_estandaritzat") +
     scale_color_discrete(name = "Clúster") +
     theme(axis.text.x = element_text(angle = 45, size = 8, hjust = 1),
           legend.position = "bottom", 
