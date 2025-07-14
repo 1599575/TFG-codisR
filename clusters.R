@@ -128,11 +128,11 @@ visualitzacio_mitjanes <- function(resultats, noms_variables, metode = "jerarqui
   # Preparació de dades segons el mètode
   if (metode == "jerarquic") {
     dades <- resultats$dades_amb_clusters
-    prefix <- "Cluster_"
+    prefix <- "Clúster "
   } else if (metode == "kmeans") {
     dades <- as.data.frame(resultats$dades_descorrelacionades)
     dades$cluster <- resultats$clusters_kmeans
-    prefix <- "Cluster_"
+    prefix <- "Clúster "
   }
   
   # Calculem mitjanes per cluster
@@ -152,8 +152,8 @@ visualitzacio_mitjanes <- function(resultats, noms_variables, metode = "jerarqui
   # Crear gràfic
   ggplot(mitjanes_clust, aes(x = Variable, y = score, col = cluster, group = cluster)) +
     geom_point() + geom_line() +
-    xlab("") + ylab("Puntuació_escalada") +
-    ggtitle(paste("Mitjanes_dels_clústers-", resultats$titol)) +
+    xlab(" ") + ylab("Consum estandaritzat") +
+    scale_color_discrete(name = "Clúster") +
     theme(axis.text.x = element_text(angle = 45, size = 8, hjust = 1),
           legend.position = "bottom", 
           legend.direction = "horizontal",
