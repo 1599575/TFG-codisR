@@ -77,8 +77,7 @@ carregues <- melt(carregues_rotades, id.vars = "Variable")
 ggplot(carregues, aes(x = Variable, y = value, fill = variable)) +
   geom_bar(stat = "identity", position = "dodge") +
   coord_flip() +
-  labs(title = "Càrregues_dels_3_patrons_principals",
-       x = "Variables", y = "Càrregues") +
+  labs(x = " ", y = "Càrregues") +
   scale_fill_discrete(name = "Patrons", labels = c("Patró_1", "Patró_2", "Patró_3")) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, size = 8, hjust = 1),
